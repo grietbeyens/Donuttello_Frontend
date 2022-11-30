@@ -1,13 +1,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import Home from '../pages/Home.vue';
-import Gallery from '../pages/Gallery.vue';
+import Gallerij from '../pages/Gallerij.vue';
 import Configurator from '../pages/Configurator.vue'
 import NotFound from '../pages/NotFound.vue';
 
 const routes = {
     '/': Home,
-    '/gallery': Gallery,
+    '/gallerij': Gallerij,
     '/configurator': Configurator,
 }
 
@@ -30,7 +30,7 @@ const currentView = computed(() => {
         <div class="navbar__links">
             <a href="#/">Home</a> 
             <a href="#/configurator">Configurator</a> 
-            <a href="#/gallery">Gallery</a> 
+            <a href="#/gallerij">Gallerij</a> 
         </div>
     </nav>
     <component :is="currentView" />

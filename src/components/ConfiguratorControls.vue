@@ -1,4 +1,22 @@
 <script setup>
+import { ref, computed } from 'vue'
+import Configurator from '../pages/Configurator.vue'
+import UniekeLink from '../pages/UniekeLink.vue'
+
+const routes = {
+    '/': Configurator,
+    '/unieke-link': UniekeLink,
+}
+
+const currentPath = ref(window.location.hash)
+
+window.addEventListener('hashchange', () => {
+    currentPath.value = window.location.hash
+})
+
+const currentView = computed(() => {
+    return routes[currentPath.value.slice(1) || '/']
+})
 </script>
 
 <template>
@@ -74,9 +92,10 @@
                         placeholder="Ik wil 1 donut zonder sprinkels."></textarea>
                 </div>
             </div>
-            <a class="btn" href="#">Naar bestelling</a>
+            <a class="btn" href="#/unieke-link">Naar bestelling</a>
         </div>
     </div>
+    <component :is="currentView" />
 </template>
 
 <style scoped>
