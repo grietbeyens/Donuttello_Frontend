@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Lato&display=swap');
+
+*{
+  margin: 0;
+}
+
+:root{
+  /* color */
+  --primary-pink: #E72C70;
+  --primary-blue: #82D1E4;
+  --primary-yellow: #F7F249;
+  --pastel-pink: #FF98C0;
+  --pastel-blue: #CAE3E8;
+  --pastel-yellow: #F8F594;
+  --neutral: #FFFFFF;
+  --dark: #212529;
+
+  /* font */
+  --title: 'Dosis', sans-serif;
+  --text: 'Lato', sans-serif;
+}
+
 body{
-  font-family: "helvetica neue", helvetica, arial, sans-serif;  
+  font-family: var(--text);;  
 }
