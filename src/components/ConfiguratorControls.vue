@@ -23,6 +23,7 @@ const currentView = computed(() => {
     <div class="nav-margin">
         <!-- donut -->
         <div class="controls">
+            <div class="padding-left">
             <div class="margin">
                 <h2 class="title">Algemeen</h2>
                 <div class="margin__small">
@@ -93,15 +94,24 @@ const currentView = computed(() => {
                 </div>
             </div>
             <a class="btn" href="#/unieke-link">Naar bestelling</a>
+            </div>
         </div>
     </div>
     <component :is="currentView" />
 </template>
 
 <style scoped>
+.padding-left{
+    padding-left: 2em;
+}
 .controls {
     background-color: var(--neutral);
-    padding: 2em 2em 4em 2em;
+    padding: 2em 0;
+    width: 100vw;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
 }
 .input__color {
     height: 2em;

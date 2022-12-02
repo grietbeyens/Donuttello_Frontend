@@ -17,8 +17,6 @@ import ConfiguratorControls from '../components/ConfiguratorControls.vue';
     }
     .controls{
         position: absolute;
-        bottom: 30%;
-        height: 100px;
-        width: 100%;
+        bottom: 0;
     } 
 </style>
