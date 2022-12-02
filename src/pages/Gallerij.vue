@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="nav-margin">
         <h2>Gallery</h2>
     </div>
 </template>

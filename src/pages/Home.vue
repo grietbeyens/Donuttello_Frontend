@@ -2,11 +2,12 @@
 </script>
 
 <template>
-    <div>
+    <div class="nav-margin">
         <h2>Home</h2>
     </div>
 </template>
 
 <style scoped>
+
 
 </style>

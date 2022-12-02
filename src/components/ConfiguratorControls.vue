@@ -20,7 +20,7 @@ const currentView = computed(() => {
 </script>
 
 <template>
-    <div>
+    <div class="nav-margin">
         <!-- donut -->
         <div class="controls">
             <div class="margin">

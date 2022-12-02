@@ -24,6 +24,7 @@
   --margin-small: 1em;
 }
 
+
 body{
   font-family: var(--text);;  
 }
@@ -83,4 +84,9 @@ body{
 
 .margin__small{
   margin-top: var(--margin-small);
+}
+
+.nav-margin{
+  margin-top: 3.75em
+  /* fix space behind nav */
 }
