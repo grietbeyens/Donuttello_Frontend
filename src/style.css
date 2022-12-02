@@ -52,15 +52,18 @@ body{
 
 .title{
   font-family: var(--title);
+  color: var(--dark);
+  font-size: 3em;
+}
+.title--secondary{
   color: var(--primary-pink);
   font-size: 2em;
 }
 
-.subtitle{
-  font-family: var(--title);
-  color: var(--dark);
+.title--tertiary{
   font-size: 1.2em;
 }
+
 
 .text{
   font-family: var(--text);
@@ -89,4 +92,17 @@ body{
 .nav-margin{
   margin-top: 3.75em
   /* fix space behind nav */
+}
+
+
+/* flexbox */
+.flex{
+    display: flex;
+}
+.flex--center{
+    justify-content: center;
+    align-items: center;
+}
+.flex--col{
+    flex-direction: column;
 }
