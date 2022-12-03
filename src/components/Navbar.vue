@@ -4,11 +4,13 @@ import Home from '../pages/Home.vue';
 import Gallerij from '../pages/Gallerij.vue';
 import Configurator from '../pages/Configurator.vue'
 import NotFound from '../pages/NotFound.vue';
+import UniekeLink from '../pages/UniekeLink.vue';
 
 const routes = {
     '/': Home,
     '/gallerij': Gallerij,
     '/configurator': Configurator,
+    '/unieke-link': UniekeLink
 }
 
 const currentPath = ref(window.location.hash)

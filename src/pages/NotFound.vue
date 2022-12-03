@@ -3,7 +3,7 @@
 
 <template>
     <div>
-        <h2>404</h2>
+        <h2>niet gevonden</h2>
     </div>
 </template>
 

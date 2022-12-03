@@ -5,7 +5,7 @@
     <div class="nav-margin padding-top ">
         <div class="flex flex--center flex--col">
             <h1 class="title margin">Jouw <span class="obligated">eigen</span> donut creëren?</h1>
-            <a class="obligated btn btn--yellow" href="#">Dat kan hier!</a>
+            <a class="obligated btn btn--yellow" href="#/configurator">Dat kan hier!</a>
         </div>
         <div>
             <img class="pattern" src="../assets/patroon.png" alt="patroon">
@@ -30,7 +30,7 @@
         </div>  
         <footer class="flex flex--center flex--col">
             <p class="title title--tertiary">Is jouw bedrijf op zoek naar een verrassende traktatie?</p>
-            <a class="btn margin__small" href="#">Klik dan hier!</a>
+            <a class="btn margin__small" href="#/configurator">Klik dan hier!</a>
         </footer>
     </div>
 </template>
