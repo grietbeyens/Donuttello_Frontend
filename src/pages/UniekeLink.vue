@@ -11,7 +11,7 @@
         <input class="input__text text" type="text" id="link" name="link" v-model="link" placeholder="link">
         </div>
         <div class="flex flex--center btn-container">
-            <a class="btn" href="#/gallery">Bestellen</a>
+            <a class="btn" href="#/gallerij">Bestellen</a>
         </div>
     </div>
 </template>
