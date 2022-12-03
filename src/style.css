@@ -74,7 +74,7 @@ body{
 .input__text{
   background-color: var(--pastel-blue);
   border: none;
-  width: 15em;
+  width: 90%;
   padding: 0.4em 0.5em;
   border-radius: 0.5em;
   display: block;
@@ -92,6 +92,10 @@ body{
 .nav-margin{
   margin-top: 3.75em
   /* fix space behind nav */
+}
+
+.text-container{
+    margin: 2em;
 }
 
 

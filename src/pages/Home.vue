@@ -45,10 +45,6 @@ h1{
     padding-top: 8em;
 }
 
-.text-container{
-    margin: 2em;
-}
-
 .pattern{
     background-size: cover;
     width: 100%;
