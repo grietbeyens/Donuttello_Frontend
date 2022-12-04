@@ -84,7 +84,7 @@
 
 <style scoped>
 .padding-left{
-    padding-left: 2em;
+    padding: 0 2em;
 }
 .controls {
     background-color: var(--neutral);
@@ -115,5 +115,12 @@ input[type="radio"] {
 
 textarea{
     resize: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .controls {
+        width: 40vw;
+        height: calc(100vh - 7.8em);
+    }
 }
 </style>

@@ -62,9 +62,10 @@ a {
     padding-right: 1em;
 }
 
-.navbar__logo{
+.navbar__logo {
     position: absolute;
-    left: calc(10vw)
+    left: calc(10vw);
+    z-index: 2;
 }
 
 .navbar__logo img{

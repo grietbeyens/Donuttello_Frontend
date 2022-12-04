@@ -64,7 +64,6 @@ body{
   font-size: 1.2em;
 }
 
-
 .text{
   font-family: var(--text);
   color: var(--dark);
@@ -113,3 +112,4 @@ body{
 .flex--wrap{
     flex-wrap: wrap;
 }
+
