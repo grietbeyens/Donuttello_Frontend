@@ -72,4 +72,11 @@ footer{
     text-align: center;
     margin-top: 16em;
 }
+
+@media screen and (min-width: 1024px) {
+    .text-container{
+        width: 50%;
+    }
+
+}
 </style>
