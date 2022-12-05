@@ -5,7 +5,7 @@
     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
             <div class="donut__container">
-                <a href="#" class="flex flex--center donut">
+                <a href="#/donut-details" class="flex flex--center donut">
                     <img src="../assets/donut.png" alt="donut">
                 </a>
                 <div class="flex flex--center donut__banner">

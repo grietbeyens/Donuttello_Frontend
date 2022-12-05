@@ -6,13 +6,15 @@ import Configurator from '../pages/Configurator.vue'
 import NotFound from '../pages/NotFound.vue';
 import UniekeLink from '../pages/UniekeLink.vue';
 import Login from '../pages/Login.vue';
+import DonutDetails from '../pages/DonutDetails.vue';
 
 const routes = {
     '/': Home,
     '/gallerij': Gallerij,
     '/configurator': Configurator,
     '/unieke-link': UniekeLink,
-    '/login': Login
+    '/login': Login,
+    '/donut-details': DonutDetails
 }
 
 const currentPath = ref(window.location.hash)
@@ -72,6 +74,18 @@ a {
 
 .navbar__logo img{
     width: 6em;
+}
+
+@media screen and (max-width: 490px) {
+    .navbar__links a {
+        margin-right: 1em;
+    }
+
+    .navbar__logo {
+        position: absolute;
+        left: calc(5vw);
+        z-index: 2;
+    }
 }
 </style>
 
