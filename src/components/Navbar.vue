@@ -5,12 +5,14 @@ import Gallerij from '../pages/Gallerij.vue';
 import Configurator from '../pages/Configurator.vue'
 import NotFound from '../pages/NotFound.vue';
 import UniekeLink from '../pages/UniekeLink.vue';
+import Login from '../pages/Login.vue';
 
 const routes = {
     '/': Home,
     '/gallerij': Gallerij,
     '/configurator': Configurator,
-    '/unieke-link': UniekeLink
+    '/unieke-link': UniekeLink,
+    '/login': Login
 }
 
 const currentPath = ref(window.location.hash)
@@ -30,9 +32,9 @@ const currentView = computed(() => {
             <a href="#/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
         </div>
         <div class="navbar__links">
-            <a href="#/">Home</a> 
             <a href="#/configurator">Configurator</a> 
             <a href="#/gallerij">Gallerij</a> 
+            <a href="#/login">Log in</a>
         </div>
     </nav>
     <component :is="currentView" />
