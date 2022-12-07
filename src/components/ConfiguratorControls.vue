@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -23,11 +24,15 @@
                 <h2 class="title title--secondary">Topping</h2>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="glazuur">Glazuur <span class="obligated">*</span>:</label>
-                    <input class="input__color" type="color" id="glazuur" name="glazuur" v-model="glazuur">
+                    <input class="input__color recolor_glaze" type="color" id="glazuur" name="glazuur" v-model="glazuur">
                 </div>
                 <div class="margin__small">
-                    <label class="title title--tertiary " for="topping">Topping <span class="obligated">*</span>:</label>
-                    <input class="input__color" type="color" id="topping" name="topping" v-model="glazuur">
+                    <label class="title title--tertiary" for="topping">Topping <span class="obligated">*</span>:</label>
+                    <input class="input__color recolor_sprinkles" type="color" id="topping" name="topping" v-model="glazuur">
+                </div>
+                <div class="margin__small">
+                    <input type="checkbox" class="checkbox" name="checkbox" id="nameplate">
+                    <label class="title title--tertiary checkbox-padding" for="nameplate">Topping aan of uit</label>
                 </div>
             </div>
             <div class="margin">
@@ -85,6 +90,10 @@
 <style scoped>
 .padding-left{
     padding: 0 2em;
+}
+
+.checkbox-padding{
+    padding: 0 0.5em;
 }
 .controls {
     background-color: var(--neutral);
