@@ -1,5 +1,6 @@
 <script setup>
 import ConfiguratorControls from '../components/ConfiguratorControls.vue';
+import Donut from '../components/Donut.vue';
 </script>
 
 <template>
@@ -10,6 +11,10 @@ import ConfiguratorControls from '../components/ConfiguratorControls.vue';
         <div class="controls">
             <ConfiguratorControls />
         </div>
+        <div class="donut">
+            <Donut/>
+        </div>
+
     </div>
 </template>
 
@@ -17,6 +22,7 @@ import ConfiguratorControls from '../components/ConfiguratorControls.vue';
 .configurator{
     background-color: var(--pastel-yellow);
     height: 100vh;
+    display: flex;
 }
 .controls{
     position: absolute;
@@ -31,6 +37,15 @@ import ConfiguratorControls from '../components/ConfiguratorControls.vue';
 
 .navbar__logo img {
     width: 6em;
+}
+
+.donut {
+    position: absolute;
+    width: 80vw;
+    height: 95vh;
+    left: 20vw;
+    top: 5vh;
+    overflow: hidden;
 }
 
 /* big screen */
