@@ -45,7 +45,7 @@
                 <div>
                     <p>Selecteer de vorm waarop je jouw logo wil bedrukken:</p>
                     <div class="margin__small">
-                        <input type="radio" id="rechthoek" name="vorm" value="rechthoek" checked="checked">
+                        <input type="radio" id="rechthoek" name="vorm" value="rechthoek">
                         <label for="rechthoek">Rechthoek</label>
                     </div>
                     <div class="margin__small">

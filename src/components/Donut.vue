@@ -32,6 +32,30 @@ onMounted(() => {
             donut.getObjectByName("Object_8").visible = true;
         }
     })
+
+    //kaartje rechthoek
+    const rechthoekGeometry = new THREE.BoxGeometry(2, 1, 1);
+    const rechthoekMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.FrontSide });
+    const rechthoek = new THREE.Mesh(rechthoekGeometry, rechthoekMaterial);
+    rechthoek.position.x = 0;
+    rechthoek.position.y = 1.7;
+    rechthoek.position.z = -1;
+    rechthoek.scale.x = 1;
+    rechthoek.scale.y = 0.1;
+    rechthoek.scale.z = 1;
+    rechthoek.rotation.x = 0.5;
+
+    const checkboxRechthoek = document.querySelector("#rechthoek");
+    checkboxRechthoek.addEventListener("change", () => {
+        if (checkboxRechthoek.checked) {
+            scene.remove(vierkant);
+            scene.remove(cirkel);
+            scene.remove(ovaal);
+            scene.add(rechthoek);
+        } else {
+            scene.remove(rechthoek);
+        }
+    });
 });
 
 window.addEventListener("resize", onWindowResize, false);
