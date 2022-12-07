@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -30,7 +31,7 @@
                     </div>
                 </div>
                 <div class="flex flex--center">
-                    <a class="btn" href="#">In afwachting</a>
+                    <a class="btn" id="btn-status" href="#/donut-details">In afwachting</a>
                 </div>
             </div>
         </div>
@@ -62,6 +63,11 @@
     color: var(--dark);
 }
 
+.btn-blue{
+    background-color: var(--pastel-blue);
+    border: 4px solid var(--primary-blue);
+    color: var(--dark);
+}
 .margin {
     margin: 2em 0 4em 0;
 }
