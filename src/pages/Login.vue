@@ -9,13 +9,10 @@
             <input class="input__text text" type="text" id="email adres" name="email adres" v-model="email"
                 placeholder="Donuttello@email.com">
         </div>
-        <div class="margin__small">
+        <div class="margin__small margin">
             <div>
                 <label class="title title--tertiary " for="wachtwoord">Wachtwoord <span class="obligated">*</span>:</label>
                 <input class="input__text text" type="password" id="wachtwoord" name="wachtwoord" v-model="wachtwoord">
-            </div>
-            <div class="flex flex--center margin__small margin">
-                <a class="pw" href="#">Wachtwoord vergeten?</a>
             </div>
         </div>
         <div class="flex flex--center">

@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound.vue';
 import UniekeLink from '../pages/UniekeLink.vue';
 import Login from '../pages/Login.vue';
 import DonutDetails from '../pages/DonutDetails.vue';
+import ChangePassword from '../pages/ChangePassword.vue';
 
 const routes = {
     '/': Home,
@@ -14,7 +15,8 @@ const routes = {
     '/configurator': Configurator,
     '/unieke-link': UniekeLink,
     '/login': Login,
-    '/donut-details': DonutDetails
+    '/donut-details': DonutDetails,
+    '/verander-wachtwoord': ChangePassword
 }
 
 const currentPath = ref(window.location.hash)
