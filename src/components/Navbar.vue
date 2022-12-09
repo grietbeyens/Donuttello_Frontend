@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, reactive, watch } from 'vue'
 import Home from '../pages/Home.vue';
 import Gallerij from '../pages/Gallerij.vue';
 import Configurator from '../pages/Configurator.vue'
@@ -7,7 +7,8 @@ import NotFound from '../pages/NotFound.vue';
 import UniekeLink from '../pages/UniekeLink.vue';
 import Login from '../pages/Login.vue';
 import DonutDetails from '../pages/DonutDetails.vue';
-import ChangePassword from '../pages/ChangePassword.vue';
+import Profiel from '../pages/Profiel.vue';
+import { LoginState } from '../store/LoginState';
 
 const routes = {
     '/': Home,
@@ -16,11 +17,11 @@ const routes = {
     '/unieke-link': UniekeLink,
     '/login': Login,
     '/donut-details': DonutDetails,
-    '/verander-wachtwoord': ChangePassword
+    '/verander-wachtwoord': Profiel,
+    '/profiel': Profiel
 }
 
 const currentPath = ref(window.location.hash)
-
 window.addEventListener('hashchange', () => {
     currentPath.value = window.location.hash
 })
@@ -28,6 +29,24 @@ window.addEventListener('hashchange', () => {
 const currentView = computed(() => {
     return routes[currentPath.value.slice(1) || '/'] || NotFound
 })
+
+watch(() => LoginState.loggedIn, (loggedIn) => {
+    if (loggedIn) {
+        document.querySelector(".login").innerHTML = "Profiel";
+        document.querySelector(".login").href = "#/profiel";
+    } else {
+        document.querySelector(".login").innerHTML = "Log in";
+        document.querySelector(".login").href = "#/login";
+    }
+});
+
+onMounted(() => {
+    if (localStorage.getItem("token")) {
+        LoginState.loggedIn = true;
+    }
+})
+
+
 </script>
 
 <template>
@@ -36,16 +55,16 @@ const currentView = computed(() => {
             <a href="#/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
         </div>
         <div class="navbar__links">
-            <a href="#/configurator">Configurator</a> 
-            <a href="#/gallerij">Gallerij</a> 
-            <a href="#/login">Log in</a>
+            <a href="#/configurator">Configurator</a>
+            <a href="#/gallerij">Gallerij</a>
+            <a class="login" href="#/login">Log in</a>
         </div>
     </nav>
     <component :is="currentView" />
 </template>
 
 <style scoped>
-.navbar{
+.navbar {
     background-color: var(--primary-pink);
     color: var(--neutral);
     width: 100%;
@@ -61,7 +80,7 @@ a {
     text-transform: uppercase;
 }
 
-.navbar__links{
+.navbar__links {
     display: flex;
     justify-content: flex-end;
     font-family: var(--title);
@@ -74,7 +93,7 @@ a {
     z-index: 2;
 }
 
-.navbar__logo img{
+.navbar__logo img {
     width: 6em;
 }
 
