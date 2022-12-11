@@ -1,68 +1,47 @@
 <script setup>
+import { BASE_URL } from '../constants';
+import { onMounted, reactive } from 'vue';
+
+let donuts = reactive([]);
+
+onMounted(() => {
+    if (localStorage.getItem("token")) {
+        let apiUrl = BASE_URL + "/api/v1/donuts/";
+        fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            mode: 'cors',
+        })
+        .then (response => response.json())
+        .then(data => {
+            console.log(data);
+            donuts = data.data;
+        })
+    }
+})
 </script>
 
 <template>
     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
-            <div class="donut__container">
+            <div class="donut__container" v-for="donut in donuts.donuts" :key="donut.id"> 
                 <a href="#/donut-details" class="flex flex--center donut">
                     <img src="../assets/donut.png" alt="donut">
                 </a>
                 <div class="flex flex--center donut__banner">
                     <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester">Naam van de donut</h3>
-                        <p class="text tester">Bedrijfsnaam</p>
+                        <h3 class="title title--tertiary tester" >{{donut.name}}</h3>
+                        <p class="text tester">{{donut.company}}</p>
                     </div>
                     <div>
                         <!-- DELETE donut -->
                         <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
                     </div>
                 </div>
-            </div>
-
-            <div class="donut__container">
-                <a href="#" class="flex flex--center donut">
-                    <img src="../assets/donut.png" alt="donut">
-                </a>
-                <div class="flex flex--center donut__banner">
-                    <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester">Naam van de donut</h3>
-                        <p class="text tester">Bedrijfsnaam</p>
-                    </div>
-                    <div>
-                        <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="donut__container">
-                <a href="#" class="flex flex--center donut">
-                    <img src="../assets/donut.png" alt="donut">
-                </a>
-                <div class="flex flex--center donut__banner">
-                    <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester">Naam van de donut</h3>
-                        <p class="text tester">Bedrijfsnaam</p>
-                    </div>
-                    <div >
-                        <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
-                    </div>
-                </div>
-            </div>
-            <div class="donut__container">
-                <a href="#" class="flex flex--center donut">
-                    <img src="../assets/donut.png" alt="donut">
-                </a>
-                <div class="flex flex--center donut__banner">
-                    <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester">Naam van de donut</h3>
-                        <p class="text tester">Bedrijfsnaam</p>
-                    </div>
-                    <div >
-                        <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
-                    </div>
-                </div>
-            </div>
+            </div>    
         </div>
     </div>
 </template>
