@@ -40,7 +40,7 @@
                 <p class="text margin__small">Onze bakkers kunnen jouw logo op een stukje chocolade drukken en plaatsen
                     deze dan op elke donut.</p>
                 <div class="margin">
-                    <input class="file margin__small" type="file" id="file" name="file">
+                    <input class="file margin__small imageInput" type="file" id="file" name="file">
                 </div>
                 <div>
                     <p>Selecteer de vorm waarop je jouw logo wil bedrukken:</p>
@@ -60,6 +60,7 @@
                         <input type="radio" id="ovaal" name="vorm" value="ovaal">
                         <label for="ovaal">Ovaal</label>
                     </div>
+                    <input value="Verwijder kaartje" type="button" class="removeimage">
                 </div>
             </div>
             <div class="margin">

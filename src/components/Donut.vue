@@ -1,6 +1,7 @@
 <script setup>
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { onMounted } from 'vue';
 // import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 
@@ -9,10 +10,24 @@ scene.background = new THREE.Color(0xF8F594);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight-200);
+renderer.setSize(window.innerWidth, window.innerHeight - 200);
+
+let donut;
+const gltfLoader = new GLTFLoader();
+gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
+    donut = gltf.scene;
+    gltf.scene.scale.set(18, 18, 18);
+    // rotate donut to front
+    gltf.scene.rotateX(-12);
+    //gltf.scene.rotateX(Math.PI / 4);
+    scene.add(donut);
+});
+
+//add orbit controls
+const controls = new OrbitControls(camera, renderer.domElement);
 onMounted(() => {
     document.querySelector(".donut").appendChild(renderer.domElement);
-    
+
     //glaze kleur
     document.querySelector(".recolor_glaze").addEventListener("input", updateGlaze, false);
     function updateGlaze(event) {
@@ -33,104 +48,123 @@ onMounted(() => {
         }
     })
 
-    //kaartje rechthoek
+    const imageInput = document.querySelector(".imageInput");
+    imageInput.addEventListener("change", (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            localStorage.setItem("image", reader.result);
+            rechthoek.material.map = new THREE.TextureLoader().load(reader.result);
+            vierkant.material.map = new THREE.TextureLoader().load(reader.result);
+            cirkel.material.map = new THREE.TextureLoader().load(reader.result);
+            ovaal.material.map = new THREE.TextureLoader().load(reader.result);
+        };
+    }
+    );
+
+    const image = localStorage.getItem("image");
+
+    const removeImage = document.querySelector(".removeimage");
+    removeImage.addEventListener("click", () => {
+        localStorage.removeItem("image");
+        document.querySelector(".imageInput").value = null;
+        group.remove(rechthoek);
+        group.remove(vierkant);
+        group.remove(cirkel);
+        group.remove(ovaal);
+        const checkboxRechthoek = document.querySelector("#rechthoek");
+        const checkboxVierkant = document.querySelector("#vierkant");
+        const checkboxCirkel = document.querySelector("#cirkel");
+        const checkboxOvaal = document.querySelector("#ovaal");
+        checkboxRechthoek.checked = false;
+        checkboxVierkant.checked = false;
+        checkboxCirkel.checked = false;
+        checkboxOvaal.checked = false;
+    });
+
+    const group = new THREE.Group();
+    scene.add(group);
+    group.add(donut);
+
+    const rechthoekTexture = new THREE.TextureLoader().load(image);
     const rechthoekGeometry = new THREE.BoxGeometry(2, 1, 1);
-    const rechthoekMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.FrontSide });
+    const rechthoekMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: rechthoekTexture, side: THREE.FrontSide });
     const rechthoek = new THREE.Mesh(rechthoekGeometry, rechthoekMaterial);
-    rechthoek.position.x = -3; //0
-    rechthoek.position.y = 5; //2.4
-    rechthoek.position.z = -1;  //-1
-    rechthoek.scale.x = 1; //1
-    rechthoek.scale.y = 0.1; //0.1
-    rechthoek.scale.z = 1; //1
-    rechthoek.rotation.x = 1.5; //1.5
+    rechthoek.position.set(0, 2, -0.2);
+    rechthoek.scale.set(1, 0.1, 1);
+    rechthoek.rotation.x = 0.8;
 
     const checkboxRechthoek = document.querySelector("#rechthoek");
     checkboxRechthoek.addEventListener("change", () => {
         if (checkboxRechthoek.checked) {
-            scene.remove(vierkant);
-            scene.remove(cirkel);
-            scene.remove(ovaal);
-            scene.add(rechthoek);
-        } else {
-            scene.remove(rechthoek);
+            group.remove(vierkant);
+            group.remove(cirkel);
+            group.remove(ovaal);
+            group.add(rechthoek);
         }
     });
 
-    //kaartje vierkant
+    const vierkantTexture = new THREE.TextureLoader().load(image);
     const vierkantGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const vierkantMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const vierkantMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: vierkantTexture });
     const vierkant = new THREE.Mesh(vierkantGeometry, vierkantMaterial);
-    vierkant.position.x = -3.4;
-    vierkant.position.y = 5;
-    vierkant.position.z = -1;
-    vierkant.scale.x = 1;
-    vierkant.scale.y = 0.1;
-    vierkant.scale.z = 1;
-    vierkant.rotation.x = 1.5;
+    vierkant.position.set(0, 2, -0.2);
+    vierkant.scale.set(1, 0.1, 1);
+    vierkant.rotation.x = 0.8;
 
     const checkboxVierkant = document.querySelector("#vierkant");
     checkboxVierkant.addEventListener("change", () => {
         if (checkboxVierkant.checked) {
-            scene.remove(rechthoek);
-            scene.remove(cirkel);
-            scene.remove(ovaal);
-            scene.add(vierkant);
-        } else {
-            scene.remove(vierkant);
+            group.remove(rechthoek);
+            group.remove(cirkel);
+            group.remove(ovaal);
+            group.add(vierkant);
         }
     });
 
-
-    //kaartje cirkel
+    const cirkelTexture = new THREE.TextureLoader().load(image);
     const cirkelGeometry = new THREE.CylinderGeometry(0.6, 0.6, 1, 32);
-    const cirkelMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const cirkelMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: cirkelTexture });
     const cirkel = new THREE.Mesh(cirkelGeometry, cirkelMaterial);
-    cirkel.position.x = -3.4;
-    cirkel.position.y = 5;
-    cirkel.position.z = -1;
-    cirkel.scale.x = 1;
-    cirkel.scale.y = 0.1;
-    cirkel.scale.z = 1;
-    cirkel.rotation.x = 1.5;
+    cirkel.position.set(0, 2, -0.2);
+    cirkel.scale.set(1, 0.1, 1);
+    cirkel.rotation.x = 0.8;
+    cirkel.rotation.y = 1.55;
 
     const checkboxCirkel = document.querySelector("#cirkel");
     checkboxCirkel.addEventListener("change", () => {
         if (checkboxCirkel.checked) {
-            scene.remove(rechthoek);
-            scene.remove(vierkant);
-            scene.remove(ovaal);
-            scene.add(cirkel);
+            group.remove(rechthoek);
+            group.remove(vierkant);
+            group.remove(ovaal);
+            group.add(cirkel);
         } else {
-            scene.remove(cirkel);
+            group.remove(cirkel);
         }
     });
 
-
-    //kaartje ovaal
+    const ovaalTexture = new THREE.TextureLoader().load(image);
     const ovaalGeometry = new THREE.CylinderGeometry(0.6, 0.6, 1, 32);
-    const ovaalMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const ovaalMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: ovaalTexture, side: THREE.FrontSide });
     const ovaal = new THREE.Mesh(ovaalGeometry, ovaalMaterial);
-    ovaal.position.x = -2.9;
-    ovaal.position.y = 5;
-    ovaal.position.z = -1;
-    ovaal.scale.x = 2;
-    ovaal.scale.y = 0.1;
-    ovaal.scale.z = 1;
-    ovaal.rotation.x = 1.5;
+    ovaal.position.set(0, 2, -0.2)
+    ovaal.scale.set(1, 0.1, 1.5);
+    ovaal.rotation.x = 0.8;
+    ovaal.rotation.y = 1.55;
 
     const checkboxOvaal = document.querySelector("#ovaal");
     checkboxOvaal.addEventListener("change", () => {
         if (checkboxOvaal.checked) {
-            scene.remove(rechthoek);
-            scene.remove(vierkant);
-            scene.remove(cirkel);
-            scene.add(ovaal);
+            group.remove(rechthoek);
+            group.remove(vierkant);
+            group.remove(cirkel);
+            group.add(ovaal);
         } else {
-            scene.remove(ovaal);
+            group.remove(ovaal);
         }
     });
-
 });
 
 window.addEventListener("resize", onWindowResize, false);
@@ -140,17 +174,6 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-let donut;
-const gltfLoader = new GLTFLoader();
-gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
-    donut = gltf.scene;
-    gltf.scene.scale.set(18, 18, 18);
-    // rotate donut to front
-    gltf.scene.rotateZ(12);
-    gltf.scene.rotateX(Math.PI / 4);
-    scene.add(donut);
-});
-
 const dire = new THREE.DirectionalLight(0xfffffff, 2);
 dire.position.set(2, 4, 2);
 scene.add(dire);
@@ -159,9 +182,6 @@ camera.position.y = 1;
 
 function animate() {
     requestAnimationFrame(animate);
-    if (donut) {
-        donut.rotation.y += 0.002;
-    }
     renderer.render(scene, camera);
 }
 
