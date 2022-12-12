@@ -2,7 +2,13 @@
 import { BASE_URL } from '../constants';
 import { onMounted, reactive } from 'vue';
 
-let donuts = reactive([]);
+if (!localStorage.getItem('token')) {
+    window.location.href = '#/'
+}
+
+let donuts = reactive({
+    donuts:[]
+});
 
 onMounted(() => {
     if (localStorage.getItem("token")) {
@@ -18,7 +24,7 @@ onMounted(() => {
         .then (response => response.json())
         .then(data => {
             console.log(data);
-            donuts = data.data;
+            donuts.donuts = data.data;
         })
     }
 })
@@ -27,7 +33,7 @@ onMounted(() => {
 <template>
     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
-            <div class="donut__container" v-for="donut in donuts.donuts" :key="donut.id"> 
+            <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id"> 
                 <a href="#/donut-details" class="flex flex--center donut">
                     <img src="../assets/donut.png" alt="donut">
                 </a>
