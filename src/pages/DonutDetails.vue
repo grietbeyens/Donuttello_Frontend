@@ -1,9 +1,58 @@
 <script setup>
+import { BASE_URL } from '../constants';
+import { onMounted, reactive} from 'vue';
+
+let id = "63931aaac0b10a37484cdd59";
+let donuts = reactive([]);
+
+
+onMounted(() => {
+    if (localStorage.getItem("token")) {
+      let apiUrl = BASE_URL + "/api/v1/donuts/"+id;
+        fetch(apiUrl, {
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            "authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            mode: 'cors',
+        })
+        .then (response => response.json())
+        .then(data => {
+            console.log(data);
+            donuts = data.data;
+        })
+    }
+})
+
+
+const changeStatus = () => {
+    if (localStorage.getItem("token")) {
+        let apiUrl = BASE_URL + "/api/v1/donuts/" + id;
+        let data = {
+            status: "Klaar"
+        }
+        fetch(apiUrl, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            mode: 'cors',
+            body: JSON.stringify(data)
+        })
+        .then (response => response.json())
+        .then(data => {
+            console.log(data);
+            // donuts = data.data;
+        })
+    }
+}
 
 </script>
 
 <template>
-    <div class="nav-margin flex-big">
+    <div class="nav-margin flex-big" v-for="donut in donuts" :key="donut.id">
         <div class="flex flex--center flex--wrap container-big">
             <div class="donut__container">
                 <a href="#/donut-details" class="flex flex--center donut">
@@ -15,8 +64,8 @@
             <div>
                 <div class="donut__banner flex">
                     <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester">Naam van de donut</h3>
-                        <p class="text tester">Bedrijfsnaam</p>
+                        <h3 class="title title--tertiary tester">{{donut.name}}</h3>
+                        <p class="text tester">{{donut.company}}</p>
                     </div>
                     <div>
                         <!-- DELETE donut -->
@@ -25,13 +74,13 @@
                 </div>
                 <div>
                     <div class="margin">
-                        <p class="title title--tertiary">Email: <span class="text">bedrijf@email.com</span></p>
-                        <p class="title title--tertiary">Aantal: <span class="text">200</span></p>
-                        <p class="title title--tertiary">Extra: <span class="text">1 donut zonder sprinkels</span></p>
+                        <p class="title title--tertiary">Email: <span class="text">{{donut.email}}</span></p>
+                        <p class="title title--tertiary">Aantal: <span class="text">{{donut.amount}}</span></p>
+                        <p class="title title--tertiary">Extra: <span class="text">{{donut.extra}}</span></p>
                     </div>
                 </div>
                 <div class="flex flex--center">
-                    <a class="btn" id="btn-status" href="#/donut-details">In afwachting</a>
+                    <button class="btn" @click="changeStatus">{{donut.status}}</button>
                 </div>
             </div>
         </div>
