@@ -1,9 +1,11 @@
 <script setup>
 import { BASE_URL } from '../constants';
-import { onMounted, reactive} from 'vue';
+import { onMounted, reactive, watch} from 'vue';
 
 let id = "63931aaac0b10a37484cdd59";
-let donuts = reactive([]);
+let donuts = reactive({
+    donuts:[]
+});
 
 
 onMounted(() => {
@@ -20,7 +22,7 @@ onMounted(() => {
         .then (response => response.json())
         .then(data => {
             console.log(data);
-            donuts = data.data;
+            donuts.donuts = data.data;
         })
     }
 })
@@ -29,9 +31,17 @@ onMounted(() => {
 const changeStatus = () => {
     if (localStorage.getItem("token")) {
         let apiUrl = BASE_URL + "/api/v1/donuts/" + id;
-        let data = {
-            status: "Klaar"
+        let data;
+        if(donuts.donuts.donut.status === "Aangevraagd"){
+            data = {
+                status: "In productie"
+            }
         }
+        else if(donuts.donuts.donut.status === "In productie"){
+            data = {
+                status: "Klaar"
+            }
+        } 
         fetch(apiUrl, {
             method: "PUT",
             headers: {
@@ -44,15 +54,18 @@ const changeStatus = () => {
         .then (response => response.json())
         .then(data => {
             console.log(data);
-            // donuts = data.data;
+            donuts.donuts = data.data;
         })
     }
 }
 
+// on click on button, change status to "Klaar"
+
+
 </script>
 
 <template>
-    <div class="nav-margin flex-big" v-for="donut in donuts" :key="donut.id">
+    <div class="nav-margin flex-big" v-for="donut in donuts.donuts" :key="donut.id">
         <div class="flex flex--center flex--wrap container-big">
             <div class="donut__container">
                 <a href="#/donut-details" class="flex flex--center donut">
