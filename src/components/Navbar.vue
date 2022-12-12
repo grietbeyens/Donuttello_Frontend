@@ -34,9 +34,11 @@ watch(() => LoginState.loggedIn, (loggedIn) => {
     if (loggedIn) {
         document.querySelector(".login").innerHTML = "Profiel";
         document.querySelector(".login").href = "#/profiel";
+        document.querySelector("#gallerij").style.display = "inline-block";
     } else {
         document.querySelector(".login").innerHTML = "Log in";
         document.querySelector(".login").href = "#/login";
+        document.querySelector("#gallerij").style.display = "none";
     }
 });
 
@@ -56,7 +58,7 @@ onMounted(() => {
         </div>
         <div class="navbar__links">
             <a href="#/configurator">Configurator</a>
-            <a href="#/gallerij">Gallerij</a>
+            <a href="#/gallerij" id="gallerij">Gallerij</a>
             <a class="login" href="#/login">Log in</a>
         </div>
     </nav>
@@ -95,6 +97,10 @@ a {
 
 .navbar__logo img {
     width: 6em;
+}
+
+#gallerij {
+    display: none;
 }
 
 @media screen and (max-width: 490px) {
