@@ -2,7 +2,7 @@
 import { BASE_URL } from '../constants';
 import { onMounted, reactive, watch} from 'vue';
 
-let id = "63931aaac0b10a37484cdd59";
+let id = "639742a64ab0955234eeaf65";
 let donuts = reactive({
     donuts:[]
 });
@@ -59,7 +59,25 @@ const changeStatus = () => {
     }
 }
 
-// on click on button, change status to "Klaar"
+const deleteDonut = () => {
+    if (localStorage.getItem("token")) {
+        let apiUrl = BASE_URL + "/api/v1/donuts/" + id;
+        fetch(apiUrl, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "Bearer " + localStorage.getItem("token"),
+            },
+            mode: 'cors',
+        })
+        .then (response => response.json())
+        .then(data => {
+            console.log(data);
+            // donuts.donuts = data.data;
+        })
+        window.location.href = '#/gallerij'
+    }
+}
 
 
 </script>
@@ -81,8 +99,7 @@ const changeStatus = () => {
                         <p class="text tester">{{donut.company}}</p>
                     </div>
                     <div>
-                        <!-- DELETE donut -->
-                        <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
+                        <button @click="deleteDonut"><img src="../assets/trash.svg" alt="verwijder"></button>
                     </div>
                 </div>
                 <div>

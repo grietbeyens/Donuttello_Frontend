@@ -42,10 +42,6 @@ onMounted(() => {
                         <h3 class="title title--tertiary tester" >{{donut.name}}</h3>
                         <p class="text tester">{{donut.company}}</p>
                     </div>
-                    <div>
-                        <!-- DELETE donut -->
-                        <a href="#"><img src="../assets/trash.svg" alt="verwijder"></a>
-                    </div>
                 </div>
             </div>    
         </div>
