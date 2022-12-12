@@ -1,33 +1,68 @@
 <script setup>
+import { BASE_URL } from '../constants';
 
+const createDonut = () =>{
+    let apiUrl = BASE_URL + "/api/v1/donuts/";
+    let shapes = document.getElementsByClassName("shape");
+    let shape;
+
+    for (let i = 0; i < shapes.length; i++) {
+        if (shapes[i].checked) {
+            shape = shapes[i].value;
+            console.log(shape);
+           
+        }
+    }
+    
+    let data = {
+        name: document.querySelector("#name").value,
+        glace: document.querySelector("#glaze").value,
+        topping: document.querySelector("#topping").value,
+        logo: document.querySelector("#logo").value,
+        shape: shape,
+        amount: document.querySelector("#amount").value,
+        email: document.querySelector("#email").value,
+        company: document.querySelector("#company").value,  
+        extra: document.querySelector("#extra").value  
+    }
+    fetch(apiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        mode: 'cors',
+        body: JSON.stringify(data)
+    })
+    .then (response => response.json())
+    window.location.href = "#/unieke-link";
+}
 </script>
 
 <template>
     <div class="nav-margin">
-        <!-- donut -->
         <div class="controls">
             <div class="padding-left">
             <div class="margin">
                 <h2 class="title title--secondary">Algemeen</h2>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="bedrijfsnaam">Bedrijfsnaam <span class="obligated">*</span>:</label>
-                    <input class="input__text text" type="text" id="bedrijfsnaam" name="bedrijfsnaam"
-                        v-model="bedrijfsnaam" placeholder="Donuttello">
+                    <input class="input__text text" type="text" id="company" name="bedrijfsnaam"
+                        v-model="bedrijfsnaam" placeholder="Donuttello" required>
                 </div>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="email">Mijn email adres <span class="obligated">*</span>:</label>
                     <input class="input__text text" type="text" id="email" name="email" v-model="email"
-                        placeholder="bedrijf@email.com">
+                        placeholder="bedrijf@email.com" required>
                 </div>
             </div>
             <div class="margin">
                 <h2 class="title title--secondary">Topping</h2>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="glazuur">Glazuur <span class="obligated">*</span>:</label>
-                    <input class="input__color recolor_glaze" type="color" id="glazuur" name="glazuur" v-model="glazuur">
+                    <input class="input__color recolor_glaze" type="color" id="glaze" name="glazuur" v-model="glazuur" required>
                 </div>
                 <div class="margin__small">
-                    <label class="title title--tertiary" for="topping">Topping <span class="obligated">*</span>:</label>
+                    <label class="title title--tertiary" for="topping">Topping:</label>
                     <input class="input__color recolor_sprinkles" type="color" id="topping" name="topping" v-model="glazuur">
                 </div>
                 <div class="margin__small">
@@ -40,24 +75,24 @@
                 <p class="text margin__small">Onze bakkers kunnen jouw logo op een stukje chocolade drukken en plaatsen
                     deze dan op elke donut.</p>
                 <div class="margin">
-                    <input class="file margin__small imageInput" type="file" id="file" name="file">
+                    <input class="file margin__small imageInput" type="file" id="logo" name="file">
                 </div>
                 <div>
                     <p>Selecteer de vorm waarop je jouw logo wil bedrukken:</p>
                     <div class="margin__small">
-                        <input type="radio" id="rechthoek" name="vorm" value="rechthoek">
+                        <input type="radio" class="shape" id="rechthoek" name="shape" value="rechthoek">
                         <label for="rechthoek">Rechthoek</label>
                     </div>
                     <div class="margin__small">
-                        <input type="radio" id="vierkant" name="vorm" value="vierkant">
+                        <input type="radio" class="shape" id="vierkant" name="shape" value="vierkant">
                         <label for="vierkant">Vierkant</label>
                     </div>
                     <div class="margin__small">
-                        <input type="radio" id="cirkel" name="vorm" value="cirkel">
+                        <input type="radio" class="shape" id="cirkel" name="shape" value="cirkel">
                         <label for="cirkel">Cirkel</label>
                     </div>
                     <div class="margin__small">
-                        <input type="radio" id="ovaal" name="vorm" value="ovaal">
+                        <input type="radio" class="shape" id="ovaal" name="shape" value="ovaal">
                         <label for="ovaal">Ovaal</label>
                     </div>
                     <input value="Verwijder kaartje" type="button" class="removeimage">
@@ -67,13 +102,13 @@
                 <h2 class="title title--secondary">Bijna klaar</h2>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="donut">Zo heet mijn donut <span class="obligated">*</span>:</label>
-                    <input class="input__text text" type="text" id="donut" name="donut" v-model="donut"
-                        placeholder="Sprikelicious">
+                    <input class="input__text text" type="text" id="name" name="donut" v-model="donut"
+                        placeholder="Sprikelicious" required>
                 </div>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="aantal">Aantal <span class="obligated">*</span>:</label>
-                    <input class="input__text text" type="text" id="aantal" name="aantal" v-model="donut"
-                        placeholder="100">
+                    <input class="input__text text" type="text" id="amount" name="aantal" v-model="donut"
+                        placeholder="100" required>
                 </div>
                 <div class="margin__small">
                     <label class="title title--tertiary " for="extra">Dit wil ik nog zeggen:</label>
@@ -81,7 +116,7 @@
                         placeholder="Ik wil 1 donut zonder sprinkels."></textarea>
                 </div>
             </div>
-            <a class="btn" href="#/unieke-link">Naar bestelling</a>
+            <button class="btn" @click="createDonut">Naar bestelling</button>
             </div>
         </div>
     </div>
