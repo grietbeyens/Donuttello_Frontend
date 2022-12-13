@@ -23,6 +23,7 @@ import Donut from '../components/Donut.vue';
     background-color: var(--pastel-yellow);
     height: 100vh;
     display: flex;
+    overflow: hidden;
 }
 .controls{
     position: absolute;
@@ -53,13 +54,15 @@ import Donut from '../components/Donut.vue';
     .controls {
         top: 0;
         z-index: 1;
+        overflow: hidden;
     }
     
     .donut {
-        width: 80vw;
+        width: 70vw;
         height: 95vh;
         left: 25vw;
         top: 5vh;
+        overflow: hidden;
     }
 }
 </style>
