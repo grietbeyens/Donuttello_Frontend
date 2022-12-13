@@ -1,6 +1,25 @@
 <script setup>
 import { BASE_URL } from '../constants';
 import router from '../router/router';
+console.log(process.env.VUE_APP_UPLOAD_PRESET_NAME);
+
+let logoUrl;
+
+const createUrl = () => {
+    let logo = document.querySelector(".imageInput").files[0];
+    let formData = new FormData();
+    formData.append("file", logo);
+    formData.append("upload_preset", process.env.VUE_APP_UPLOAD_PRESET_NAME);
+    fetch("https://api.cloudinary.com/v1_1/dg3efqczq/image/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        logoUrl = data.secure_url;
+        createDonut();
+    })
+}
 
 const createDonut = () =>{
     let apiUrl = BASE_URL + "/api/v1/donuts/";
@@ -10,7 +29,6 @@ const createDonut = () =>{
     for (let i = 0; i < shapes.length; i++) {
         if (shapes[i].checked) {
             shape = shapes[i].value;
-            console.log(shape);
         }
     }
     
@@ -18,7 +36,7 @@ const createDonut = () =>{
         name: document.querySelector("#name").value,
         glace: document.querySelector("#glaze").value,
         topping: document.querySelector("#topping").value,
-        logo: document.querySelector("#logo").value,
+        logo: logoUrl,
         shape: shape,
         amount: document.querySelector("#amount").value,
         email: document.querySelector("#email").value,
@@ -116,7 +134,7 @@ const createDonut = () =>{
                         placeholder="Ik wil 1 donut zonder sprinkels."></textarea>
                 </div>
             </div>
-            <router-link class="btn" @click="createDonut" exact to="">Naar bestelling</router-link>
+            <router-link class="btn" @click="createUrl" exact to="">Naar bestelling</router-link>
             </div>
         </div>
     </div>
