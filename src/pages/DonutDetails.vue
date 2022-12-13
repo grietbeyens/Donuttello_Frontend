@@ -103,6 +103,9 @@ const deleteDonut = () => {
                         <p class="title title--tertiary">Email: <span class="text">{{donut.email}}</span></p>
                         <p class="title title--tertiary">Aantal: <span class="text">{{donut.amount}}</span></p>
                         <p class="title title--tertiary">Extra: <span class="text">{{donut.extra}}</span></p>
+                        <p class="title title--tertiary">Glazuur: <span class="text">{{donut.glace}}</span></p>
+                        <p class="title title--tertiary">Topping: <span class="text">{{donut.topping}}</span></p>
+                        <p class="title title--tertiary">Logo: <img :src="donut.logo" alt="Geen logo gekozen"></p>
                     </div>
                 </div>
                 <div class="flex flex--center">
