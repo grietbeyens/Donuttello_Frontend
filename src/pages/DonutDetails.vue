@@ -104,7 +104,7 @@ const deleteDonut = () => {
                         <p class="title title--tertiary">Extra: <span class="text">{{donut.extra}}</span></p>
                         <p class="title title--tertiary">Glazuur: <span class="text">{{donut.glace}}</span></p>
                         <p class="title title--tertiary">Topping: <span class="text">{{donut.topping}}</span></p>
-                        <p class="title title--tertiary">Logo: <img :src="donut.logo" alt="Geen logo gekozen"></p>
+                        <p class="title title--tertiary">Logo: <img :src="donut.logo" alt="Geen logo gekozen" class="logo"></p>
                     </div>
                 </div>
                 <div class="flex flex--center">
@@ -152,6 +152,10 @@ const deleteDonut = () => {
 .details-big{
     margin: 0 2em;
     
+}
+
+.logo{
+    width: 10em;
 }
 
 @media screen and (min-width: 1024px) {
