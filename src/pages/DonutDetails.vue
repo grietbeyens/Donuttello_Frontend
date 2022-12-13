@@ -1,12 +1,12 @@
 <script setup>
 import { BASE_URL } from '../constants';
-import { onMounted, reactive, watch} from 'vue';
+import { onMounted, reactive} from 'vue';
 
-let id = "639742a64ab0955234eeaf65";
+let id = window.location.pathname.split("/")[2];
 let donuts = reactive({
     donuts:[]
 });
-
+console.log(id);
 
 onMounted(() => {
     if (localStorage.getItem("token")) {
@@ -71,11 +71,7 @@ const deleteDonut = () => {
             mode: 'cors',
         })
         .then (response => response.json())
-        .then(data => {
-            console.log(data);
-            // donuts.donuts = data.data;
-        })
-        window.location.href = '#/gallerij'
+        window.location.href = '/gallerij'
     }
 }
 
@@ -86,7 +82,7 @@ const deleteDonut = () => {
     <div class="nav-margin flex-big" v-for="donut in donuts.donuts" :key="donut.id">
         <div class="flex flex--center flex--wrap container-big">
             <div class="donut__container">
-                <a href="#/donut-details" class="flex flex--center donut">
+                <a href="/donut-details" class="flex flex--center donut">
                     <img src="../assets/donut.png" alt="donut">
                 </a>
             </div>
