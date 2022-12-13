@@ -1,7 +1,7 @@
 <script setup>
 import { BASE_URL } from '../constants';
 import router from '../router/router';
-console.log(process.env.VUE_APP_UPLOAD_PRESET_NAME);
+// console.log(process.env.VUE_APP_UPLOAD_PRESET_NAME);
 
 let logoUrl;
 
@@ -9,7 +9,7 @@ const createUrl = () => {
     let logo = document.querySelector(".imageInput").files[0];
     let formData = new FormData();
     formData.append("file", logo);
-    formData.append("upload_preset", process.env.VUE_APP_UPLOAD_PRESET_NAME);
+    formData.append("upload_preset", "ufvfe1g5");
     fetch("https://api.cloudinary.com/v1_1/dg3efqczq/image/upload", {
         method: "POST",
         body: formData
