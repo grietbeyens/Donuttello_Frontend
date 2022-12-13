@@ -3,11 +3,11 @@ import { BASE_URL } from '../constants';
 import { onMounted, reactive } from 'vue';
 
 if (!localStorage.getItem('token')) {
-    window.location.href = '#/'
+    window.location.href = '/'
 }
 
 let donuts = reactive({
-    donuts:[]
+    donuts: []
 });
 
 onMounted(() => {
@@ -21,60 +21,63 @@ onMounted(() => {
             },
             mode: 'cors',
         })
-        .then (response => response.json())
-        .then(data => {
-            console.log(data);
-            donuts.donuts = data.data;
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                donuts.donuts = data.data;
+            })
     }
 })
+
 </script>
 
 <template>
     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
-            <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id"> 
-                <a href="#/donut-details" class="flex flex--center donut">
+            <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id" >
+                <a :href="('/donut-details/'+donut._id)" class="flex flex--center donut">
                     <img src="../assets/donut.png" alt="donut">
                 </a>
                 <div class="flex flex--center donut__banner">
                     <div class="donut__banner__text">
-                        <h3 class="title title--tertiary tester" >{{donut.name}}</h3>
-                        <p class="text tester">{{donut.company}}</p>
+                        <h3 class="title title--tertiary tester">{{ donut.name }}</h3>
+                        <p class="text tester">{{ donut.company }}</p>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-.donut{
+.donut {
     padding: 2em 0;
 }
+
 .donut__container {
-background-color: var(--pastel-blue);
-width: 22em;
-border-radius: 40px;
-margin: 1em
+    background-color: var(--pastel-blue);
+    width: 22em;
+    border-radius: 40px;
+    margin: 1em
 }
 
-.donut__banner{
-background-color: var(--neutral);
-box-shadow: 0px 148px 59px rgba(0, 66, 62, 0.01),
-    0px 83px 50px rgba(0, 66, 62, 0.05),
-    0px 37px 37px rgba(0, 66, 62, 0.09),
-    0px 9px 20px rgba(0, 66, 62, 0.1),
-    0px 0px 0px rgba(0, 66, 62, 0.1);;
-border-radius: 0 0 40px 40px;
-padding: 1em 0;
+.donut__banner {
+    background-color: var(--neutral);
+    box-shadow: 0px 148px 59px rgba(0, 66, 62, 0.01),
+        0px 83px 50px rgba(0, 66, 62, 0.05),
+        0px 37px 37px rgba(0, 66, 62, 0.09),
+        0px 9px 20px rgba(0, 66, 62, 0.1),
+        0px 0px 0px rgba(0, 66, 62, 0.1);
+    ;
+    border-radius: 0 0 40px 40px;
+    padding: 1em 0;
 }
 
-.donut__banner__text{
+.donut__banner__text {
     padding-right: 2em;
 }
 
-.gallery{
+.gallery {
     margin-top: 6em;
 }
 </style>

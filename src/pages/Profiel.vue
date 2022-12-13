@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants';
 import { LoginState } from '../store/LoginState';
 
 if (!localStorage.getItem('token')) {
-    window.location.href = '#/login'
+    window.location.href = '/login'
 }
 
 const changePassword = (e) => {
@@ -35,7 +35,7 @@ const changePassword = (e) => {
         .then(data => {
             console.log(data);
             if (data.status === "success") {
-                window.location.href = "#/gallerij";
+                window.location.href = "/gallerij";
             } else {
                 alert(data.message);
             }
@@ -45,7 +45,7 @@ const changePassword = (e) => {
 const logOut = () => {
     LoginState.loggedIn = false;
     localStorage.removeItem("token");
-    window.location.href = "#/home";
+    window.location.href = "/home";
 }
 
 

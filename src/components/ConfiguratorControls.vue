@@ -120,7 +120,6 @@ const createDonut = () =>{
             </div>
         </div>
     </div>
-    <component :is="currentView" />
 </template>
 
 <style scoped>
@@ -164,7 +163,7 @@ textarea{
 
 @media screen and (min-width: 1024px) {
     .controls {
-        width: 40vw;
+        width: 50vw;
         height: calc(100vh - 7.8em);
     }
 }

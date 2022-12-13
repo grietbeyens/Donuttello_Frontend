@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants';
 import { LoginState } from '../store/LoginState';
 
 if (localStorage.getItem('token')) {
-    window.location.href = '#/profiel';
+    window.location.href = '/profiel';
 }
 
 const login = (e) => {
@@ -35,7 +35,7 @@ const login = (e) => {
 
                 LoginState.loggedIn = true;
 
-                window.location.href = "#/gallerij";
+                window.location.href = "/gallerij";
             } else {
                 alert("Er is iets misgegaan, probeer het opnieuw");
             }

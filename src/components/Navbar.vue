@@ -1,43 +1,15 @@
 <script setup>
 import { ref, computed, onMounted, reactive, watch } from 'vue'
-import Home from '../pages/Home.vue';
-import Gallerij from '../pages/Gallerij.vue';
-import Configurator from '../pages/Configurator.vue'
-import NotFound from '../pages/NotFound.vue';
-import UniekeLink from '../pages/UniekeLink.vue';
-import Login from '../pages/Login.vue';
-import DonutDetails from '../pages/DonutDetails.vue';
-import Profiel from '../pages/Profiel.vue';
 import { LoginState } from '../store/LoginState';
-
-const routes = {
-    '/': Home,
-    '/gallerij': Gallerij,
-    '/configurator': Configurator,
-    '/unieke-link': UniekeLink,
-    '/login': Login,
-    '/donut-details': DonutDetails,
-    '/verander-wachtwoord': Profiel,
-    '/profiel': Profiel
-}
-
-const currentPath = ref(window.location.hash)
-window.addEventListener('hashchange', () => {
-    currentPath.value = window.location.hash
-})
-
-const currentView = computed(() => {
-    return routes[currentPath.value.slice(1) || '/'] || NotFound
-})
 
 watch(() => LoginState.loggedIn, (loggedIn) => {
     if (loggedIn) {
         document.querySelector(".login").innerHTML = "Profiel";
-        document.querySelector(".login").href = "#/profiel";
+        document.querySelector(".login").href = "/profiel";
         document.querySelector("#gallerij").style.display = "inline-block";
     } else {
         document.querySelector(".login").innerHTML = "Log in";
-        document.querySelector(".login").href = "#/login";
+        document.querySelector(".login").href = "/login";
         document.querySelector("#gallerij").style.display = "none";
     }
 });
@@ -54,15 +26,15 @@ onMounted(() => {
 <template>
     <nav class="navbar">
         <div class="navbar__logo">
-            <a href="#/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
+            <a href="/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
         </div>
         <div class="navbar__links">
-            <a href="#/configurator">Configurator</a>
-            <a href="#/gallerij" id="gallerij">Gallerij</a>
-            <a class="login" href="#/login">Log in</a>
+            <a href="/configurator">Configurator</a>
+            <a href="/gallerij" id="gallerij">Gallerij</a>
+            <a class="login" href="/login">Log in</a>
         </div>
     </nav>
-    <component :is="currentView" />
+    <!-- <component :is="currentView" /> -->
 </template>
 
 <style scoped>
