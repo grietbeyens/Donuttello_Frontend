@@ -24,7 +24,6 @@ onMounted(() => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 donuts.donuts = data.data;
             })
     }

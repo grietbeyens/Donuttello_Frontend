@@ -34,7 +34,6 @@ const changePassword = (e) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status === "success") {
                 router.push('/gallerij')
             } else {

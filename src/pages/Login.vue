@@ -30,7 +30,6 @@ const login = (e) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status === "success") {
                 localStorage.setItem("token", data.data.token);
                 LoginState.loggedIn = true;
