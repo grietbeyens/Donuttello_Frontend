@@ -1,9 +1,10 @@
 <script setup>
 import { BASE_URL } from '../constants';
 import { LoginState } from '../store/LoginState';
+import router from '../router/router';
 
 if (localStorage.getItem('token')) {
-    window.location.href = '/profiel';
+    router.push('/profiel'); //verwijst u naar gallerij
 }
 
 const login = (e) => {
@@ -32,10 +33,8 @@ const login = (e) => {
             console.log(data);
             if (data.status === "success") {
                 localStorage.setItem("token", data.data.token);
-
                 LoginState.loggedIn = true;
-
-                window.location.href = "/gallerij";
+                router.push('/gallerij');
             } else {
                 alert("Er is iets misgegaan, probeer het opnieuw");
             }
@@ -59,7 +58,7 @@ const login = (e) => {
             </div>
         </div>
         <div class="flex flex--center">
-            <a class="btn" href="" @click="login">Log in</a>
+            <router-link class="btn" @click="login" exact to="">Log in</router-link>
         </div>
     </div>
 </template>

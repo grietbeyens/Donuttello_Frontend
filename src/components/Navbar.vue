@@ -26,12 +26,12 @@ onMounted(() => {
 <template>
     <nav class="navbar">
         <div class="navbar__logo">
-            <a href="/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
+            <router-link exact to="/"><img src="../assets/donuttello-logo.png" alt="logo"></router-link>
         </div>
         <div class="navbar__links">
-            <a href="/configurator">Configurator</a>
-            <a href="/gallerij" id="gallerij">Gallerij</a>
-            <a class="login" href="/login">Log in</a>
+            <router-link exact to="/configurator">Configurator</router-link> 
+            <router-link id="gallerij" exact to="/gallerij">Gallerij</router-link>
+            <router-link class="login" exact to="/login">Log in</router-link>
         </div>
     </nav>
     <!-- <component :is="currentView" /> -->

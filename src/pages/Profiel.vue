@@ -1,9 +1,10 @@
 <script setup>
 import { BASE_URL } from '../constants';
+import router from '../router/router';
 import { LoginState } from '../store/LoginState';
 
 if (!localStorage.getItem('token')) {
-    window.location.href = '/login'
+    router.push('/login');
 }
 
 const changePassword = (e) => {
@@ -35,7 +36,7 @@ const changePassword = (e) => {
         .then(data => {
             console.log(data);
             if (data.status === "success") {
-                window.location.href = "/gallerij";
+                router.push('/gallerij')
             } else {
                 alert(data.message);
             }
@@ -45,7 +46,7 @@ const changePassword = (e) => {
 const logOut = () => {
     LoginState.loggedIn = false;
     localStorage.removeItem("token");
-    window.location.href = "/home";
+    router.push('/');
 }
 
 
@@ -72,8 +73,8 @@ const logOut = () => {
             <input class="input__text text" type="password" id="pw-repeat" name="pw-repeat" v-model="text">
         </div>
         <div class="flex flex--center">
-            <a class="btn" href="" @click="changePassword">Verander</a>
-            <a class="btn btn--yellow" href="" @click="logOut" >Log out</a>
+            <router-link class="btn" @click="changePassword" exact to="">Verander</router-link>
+            <router-link class="btn btn--yellow" @click="logOut" exact to="">Log out</router-link>
         </div>
     </div>
 </template>

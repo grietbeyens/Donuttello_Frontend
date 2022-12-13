@@ -5,7 +5,7 @@ import Donut from '../components/Donut.vue';
 
 <template>
     <div class="navbar__logo">
-        <a  href="#/"><img src="../assets/donuttello-logo.png" alt="logo"></a>
+        <router-link exact to="/"><img src="../assets/donuttello-logo.png" alt="logo"></router-link>
     </div>
     <div class="configurator">
         <div class="controls">
@@ -27,6 +27,7 @@ import Donut from '../components/Donut.vue';
 .controls{
     position: absolute;
     bottom: 0;
+    overflow: hidden;
 } 
 .navbar__logo {
     position: absolute;

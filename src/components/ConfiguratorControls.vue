@@ -1,5 +1,6 @@
 <script setup>
 import { BASE_URL } from '../constants';
+import router from '../router/router';
 
 const createDonut = () =>{
     let apiUrl = BASE_URL + "/api/v1/donuts/";
@@ -10,7 +11,6 @@ const createDonut = () =>{
         if (shapes[i].checked) {
             shape = shapes[i].value;
             console.log(shape);
-           
         }
     }
     
@@ -34,7 +34,7 @@ const createDonut = () =>{
         body: JSON.stringify(data)
     })
     .then (response => response.json())
-    window.location.href = "#/unieke-link";
+    router.push('/bestelling'); 
 }
 </script>
 
@@ -116,7 +116,7 @@ const createDonut = () =>{
                         placeholder="Ik wil 1 donut zonder sprinkels."></textarea>
                 </div>
             </div>
-            <button class="btn" @click="createDonut">Naar bestelling</button>
+            <router-link class="btn" @click="createDonut" exact to="">Naar bestelling</router-link>
             </div>
         </div>
     </div>

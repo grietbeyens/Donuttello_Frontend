@@ -1,6 +1,7 @@
 <script setup>
 import { BASE_URL } from '../constants';
 import { onMounted, reactive} from 'vue';
+import router from '../router/router';
 
 let id = window.location.pathname.split("/")[2];
 let donuts = reactive({
@@ -71,7 +72,7 @@ const deleteDonut = () => {
             mode: 'cors',
         })
         .then (response => response.json())
-        window.location.href = '/gallerij'
+        router.push('/gallerij')
     }
 }
 
@@ -82,9 +83,7 @@ const deleteDonut = () => {
     <div class="nav-margin flex-big" v-for="donut in donuts.donuts" :key="donut.id">
         <div class="flex flex--center flex--wrap container-big">
             <div class="donut__container">
-                <a href="/donut-details" class="flex flex--center donut">
-                    <img src="../assets/donut.png" alt="donut">
-                </a>
+                <div class="flex flex--center donut"><img src="../assets/donut.png" alt="donut"></div>
             </div>
         </div>
         <div class="details-big flex flex--center">
@@ -95,7 +94,7 @@ const deleteDonut = () => {
                         <p class="text tester">{{donut.company}}</p>
                     </div>
                     <div>
-                        <button @click="deleteDonut"><img src="../assets/trash.svg" alt="verwijder"></button>
+                        <router-link  @click="deleteDonut" exact to=""><img src="../assets/trash.svg" alt="verwijder"></router-link>
                     </div>
                 </div>
                 <div>
@@ -109,7 +108,7 @@ const deleteDonut = () => {
                     </div>
                 </div>
                 <div class="flex flex--center">
-                    <button class="btn" @click="changeStatus">{{donut.status}}</button>
+                    <router-link class="btn" @click="changeStatus" exact to="">{{donut.status}}</router-link>
                 </div>
             </div>
         </div>

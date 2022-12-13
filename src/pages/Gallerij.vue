@@ -1,9 +1,10 @@
 <script setup>
 import { BASE_URL } from '../constants';
 import { onMounted, reactive } from 'vue';
+import router from '../router/router';
 
 if (!localStorage.getItem('token')) {
-    window.location.href = '/'
+    router.push('/')
 }
 
 let donuts = reactive({
@@ -35,9 +36,7 @@ onMounted(() => {
     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
             <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id" >
-                <a :href="('/donut-details/'+donut._id)" class="flex flex--center donut">
-                    <img src="../assets/donut.png" alt="donut">
-                </a>
+                <router-link class="flex flex--center donut" :to="'/donut-details/' +donut._id"><img src="../assets/donut.png" alt="donut"></router-link>
                 <div class="flex flex--center donut__banner">
                     <div class="donut__banner__text">
                         <h3 class="title title--tertiary tester">{{ donut.name }}</h3>
