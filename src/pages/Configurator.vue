@@ -41,10 +41,9 @@ import Donut from '../components/Donut.vue';
 
 .donut {
     position: absolute;
-    width: 80vw;
-    height: 95vh;
-    left: 20vw;
-    top: 5vh;
+    width: 100vw;
+    height: 70vh;
+    top: 0vh;
     overflow: hidden;
 }
 
@@ -55,5 +54,11 @@ import Donut from '../components/Donut.vue';
         z-index: 1;
     }
     
+    .donut {
+        width: 80vw;
+        height: 95vh;
+        left: 25vw;
+        top: 5vh;
+    }
 }
 </style>
