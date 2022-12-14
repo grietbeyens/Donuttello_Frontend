@@ -7,7 +7,6 @@ let id = window.location.pathname.split("/")[2];
 let donuts = reactive({
     donuts:[]
 });
-console.log(id);
 
 onMounted(() => {
     if (localStorage.getItem("token")) {
