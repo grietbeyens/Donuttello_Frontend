@@ -17,7 +17,7 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
     donut = gltf.scene;
     gltf.scene.scale.set(4, 4, 4);
-    gltf.scene.rotateX(-6.5);
+    gltf.scene.rotateX(Math.PI / 6)
     scene.add(donut);
 });
 
@@ -172,10 +172,12 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-const dire = new THREE.DirectionalLight(0xfffffff, 2);
+camera.position.z = 5;
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambient);
+const dire = new THREE.DirectionalLight(0xfffffff, 1);
 dire.position.set(2, 4, 2);
 scene.add(dire);
-camera.position.z = 5;
 
 function animate() {
     requestAnimationFrame(animate);
