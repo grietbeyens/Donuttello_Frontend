@@ -29,20 +29,20 @@ onMounted(() => {
     //glaze kleur
     document.querySelector(".recolor_glaze").addEventListener("input", updateGlaze, false);
     function updateGlaze(event) {
-        donut.getObjectByName("Object_6").material.color.set(event.target.value);
+        donut.getObjectByName("Icing").material.color.set(event.target.value);
     }
     //sprinkles kleur
     document.querySelector(".recolor_sprinkles").addEventListener("input", updateSprinkles, false);
     function updateSprinkles(event) {
-        donut.getObjectByName("Object_8").material.color.set(event.target.value);
+        donut.getObjectByName("Sprinkle_3039").material.color.set(event.target.value);
     }
     //sprinkels aan of op
     const removeSprinkles = document.querySelector(".checkbox");
     removeSprinkles.addEventListener("click", () => {
         if (removeSprinkles.checked) {
-            donut.getObjectByName("Object_8").visible = false;
+            donut.getObjectByName("Sprinkle_3039").visible = false;
         } else {
-            donut.getObjectByName("Object_8").visible = true;
+            donut.getObjectByName("Sprinkle_3039").visible = true;
         }
     })
 
