@@ -16,10 +16,8 @@ let donut;
 const gltfLoader = new GLTFLoader();
 gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
     donut = gltf.scene;
-    gltf.scene.scale.set(18, 18, 18);
-    // rotate donut to front
-    gltf.scene.rotateX(-12);
-    //gltf.scene.rotateX(Math.PI / 4);
+    gltf.scene.scale.set(4, 4, 4);
+    gltf.scene.rotateX(-6.5);
     scene.add(donut);
 });
 
@@ -178,7 +176,6 @@ const dire = new THREE.DirectionalLight(0xfffffff, 2);
 dire.position.set(2, 4, 2);
 scene.add(dire);
 camera.position.z = 5;
-camera.position.y = 1;
 
 function animate() {
     requestAnimationFrame(animate);
