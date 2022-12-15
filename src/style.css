@@ -113,3 +113,9 @@ body{
     flex-wrap: wrap;
 }
 
+.verwijder-kaartje{
+  color: var(--primary-pink);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+

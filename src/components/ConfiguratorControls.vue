@@ -113,7 +113,11 @@ const createDonut = () =>{
                         <input type="radio" class="shape" id="ovaal" name="shape" value="ovaal">
                         <label for="ovaal">Ovaal</label>
                     </div>
-                    <input value="Verwijder kaartje" type="button" class="removeimage">
+                    <br>
+                    <div class="margin__small">
+                        <input type="radio" class="shape" id="verwijder" name="shape" value="verwijder" checked>
+                        <label for="geen" class="verwijder-kaartje">Geen kaartje</label>
+                    </div>
                 </div>
             </div>
             <div class="margin">
