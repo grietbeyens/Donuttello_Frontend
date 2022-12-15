@@ -23,7 +23,6 @@ gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
 });
 
 //add orbit controls
-const controls = new OrbitControls(camera, renderer.domElement);
 onMounted(() => {
     document.querySelector(".donut").appendChild(renderer.domElement);
 
@@ -74,10 +73,6 @@ onMounted(() => {
         group.remove(vierkant);
         group.remove(cirkel);
         group.remove(ovaal);
-        const checkboxRechthoek = document.querySelector("#rechthoek");
-        const checkboxVierkant = document.querySelector("#vierkant");
-        const checkboxCirkel = document.querySelector("#cirkel");
-        const checkboxOvaal = document.querySelector("#ovaal");
     });
 
     const rechthoekTexture = new THREE.TextureLoader().load(image);
@@ -176,6 +171,21 @@ scene.add(dire);
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    if(group && donut) {
+        //donut rotation
+        donut.rotation.y += 0.01;
+        group.rotation.y += 0.01;
+        //if donut is 25% of the way through the animation, start rotating the group, slow down at 75%
+        if(donut.rotation.y > Math.PI / 2 && donut.rotation.y < Math.PI * 3 / 2) {
+            donut.rotation.y += 0.1;
+            group.rotation.y += 0.1;
+        }
+        //when done, repeat
+        if(donut.rotation.y > Math.PI * 2) {
+            donut.rotation.y = 0;
+            group.rotation.y = 0;
+        }
+    }
 }
 
 animate();
