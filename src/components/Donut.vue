@@ -13,6 +13,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight - 200);
 
 let donut;
+let group;
 const gltfLoader = new GLTFLoader();
 gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
     donut = gltf.scene;
@@ -63,10 +64,11 @@ onMounted(() => {
     );
 
     const image = localStorage.getItem("image");
+    group = new THREE.Group();
+    scene.add(group);
 
-    const removeImage = document.querySelector(".removeimage");
+    const removeImage = document.querySelector("#verwijder");
     removeImage.addEventListener("click", () => {
-        localStorage.removeItem("image");
         document.querySelector(".imageInput").value = null;
         group.remove(rechthoek);
         group.remove(vierkant);
@@ -76,15 +78,7 @@ onMounted(() => {
         const checkboxVierkant = document.querySelector("#vierkant");
         const checkboxCirkel = document.querySelector("#cirkel");
         const checkboxOvaal = document.querySelector("#ovaal");
-        checkboxRechthoek.checked = false;
-        checkboxVierkant.checked = false;
-        checkboxCirkel.checked = false;
-        checkboxOvaal.checked = false;
     });
-
-    const group = new THREE.Group();
-    scene.add(group);
-    group.add(donut);
 
     const rechthoekTexture = new THREE.TextureLoader().load(image);
     const rechthoekGeometry = new THREE.BoxGeometry(2, 1, 1);
