@@ -32,16 +32,21 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="nav-margin">
+     <div class="nav-margin">
         <div class="gallery flex flex--center flex--wrap ">
-            <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id" >
-                <router-link class="flex flex--center donut" :to="'/donut-details/' +donut._id"><img src="../assets/donut.png" alt="donut"></router-link>
+            <div class="donut__container" v-for="donut in donuts.donuts.donuts" :key="donut.id">
+                <router-link class="flex flex--center donut title title--secondary"
+                    :to="'/donut-details/' + donut._id">Check details</router-link>
                 <div class="flex flex--center donut__banner">
                     <div class="donut__banner__text">
                         <h3 class="title title--tertiary tester">{{ donut.name }}</h3>
                         <p class="text tester">{{ donut.company }}</p>
+                        <div class="margin__small">
+                            <h4 >Status: <span class="obligated">{{ donut.status }}</span></h4>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -49,7 +54,8 @@ onMounted(() => {
 
 <style scoped>
 .donut {
-    padding: 2em 0;
+    padding: 1em 0;
+    text-decoration: none;
 }
 
 .donut__container {
