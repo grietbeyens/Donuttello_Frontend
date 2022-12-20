@@ -10,11 +10,6 @@ if (!localStorage.getItem('token')) {
 const changePassword = (e) => {
     e.preventDefault();
     let pwNew = document.querySelector("#pw-new").value;
-    let pwRepeat = document.querySelector("#pw-repeat").value;
-    if (pwNew !== pwRepeat) {
-        alert("Wachtwoorden komen niet overeen");
-        return;
-    }
     let apiUrl = BASE_URL + "/api/v1/users/change-password";
     let token = localStorage.getItem('token');
     let pwOld = document.querySelector("#pw-old").value;
@@ -32,14 +27,15 @@ const changePassword = (e) => {
         },
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                router.push('/gallerij')
-            } else {
-                alert(data.message);
-            }
-        })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            router.push('/gallerij')
+        } else {
+            document.querySelector(".checkPw").style.display = "block";
+            document.querySelector(".checkPw").innerHTML = data.message;
+        }
+    })
 }
 
 const logOut = () => {
@@ -71,6 +67,7 @@ const logOut = () => {
                     class="obligated">*</span>:</label>
             <input class="input__text text" type="password" id="pw-repeat" name="pw-repeat" v-model="text">
         </div>
+        <p class="obligated checkPw"></p>
         <div class="flex flex--center">
             <router-link class="btn" @click="changePassword" exact to="">Verander</router-link>
             <router-link class="btn btn--yellow" @click="logOut" exact to="">Log out</router-link>
@@ -79,6 +76,11 @@ const logOut = () => {
 </template>
 
 <style scoped>
+
+.checkPw{
+    display: none;
+    margin-bottom: 1em;
+}
 .pw {
     text-decoration: none;
     color: #a0a0a0;
