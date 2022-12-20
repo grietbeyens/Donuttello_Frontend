@@ -10,7 +10,7 @@ let donuts = reactive({
 
 onMounted(() => {
     if (localStorage.getItem("token")) {
-      let apiUrl = BASE_URL + "/api/v1/donuts/"+id;
+        let apiUrl = BASE_URL + "/api/v1/donuts/"+id;
         fetch(apiUrl, {
             method: "GET",
             headers: {
@@ -26,21 +26,15 @@ onMounted(() => {
     }
 })
 
-
-const changeStatus = () => {
+const changeStatus = (status) => {
     if (localStorage.getItem("token")) {
+        let Aangevraagd = document.querySelector("#Aangevraagd");
+        let productie = document.querySelector("#productie");
+        let klaar = document.querySelector("#klaar");
         let apiUrl = BASE_URL + "/api/v1/donuts/" + id;
-        let data;
-        if(donuts.donuts.donut.status === "Aangevraagd"){
-            data = {
-                status: "In productie"
+        let data = {
+                status: status
             }
-        }
-        else if(donuts.donuts.donut.status === "In productie"){
-            data = {
-                status: "Klaar"
-            }
-        } 
         fetch(apiUrl, {
             method: "PUT",
             headers: {
@@ -53,6 +47,19 @@ const changeStatus = () => {
         .then (response => response.json())
         .then(data => {
             donuts.donuts = data.data;
+            if (donuts.donuts.donut.status === "Aangevraagd") {
+                Aangevraagd.style.color = "#F7F249";
+                productie.style.color = "#212529";
+                klaar.style.color = "#212529";
+            } else if (donuts.donuts.donut.status === "In productie") {
+                Aangevraagd.style.color = "#212529";
+                productie.style.color = "#F7F249";
+                klaar.style.color = "#212529";
+            } else if (donuts.donuts.donut.status === "Klaar") {
+                Aangevraagd.style.color = "#212529";
+                productie.style.color = "#212529";
+                klaar.style.color = "#F7F249";
+            }
         })
     }
 }
@@ -101,11 +108,13 @@ const deleteDonut = () => {
                         <p class="title title--tertiary">Extra: <span class="text">{{donut.extra}}</span></p>
                         <p class="title title--tertiary">Glazuur: <span class="text">{{donut.glace}}</span></p>
                         <p class="title title--tertiary">Topping: <span class="text">{{donut.topping}}</span></p>
-                        <p class="title title--tertiary">Logo: <img :src="donut.logo" alt="Geen logo gekozen" class="logo"></p>
+                        <p class="title title--tertiary">Logo: <img :src="donut.logo" alt="Geen logo gekozen" class="img"></p>
                     </div>
                 </div>
-                <div class="flex flex--center">
-                    <router-link class="btn" @click="changeStatus" exact to="">{{donut.status}}</router-link>
+                <div class="flex flex--center status">
+                    <div id="Aangevraagd" class="btn status__btn" @click="changeStatus('Aangevraagd')">Aangevraagd</div>
+                    <div id="productie" class="btn status__btn" @click="changeStatus('In productie')">In productie</div>
+                    <div id="klaar" class="btn status__btn" @click="changeStatus('Klaar')">Klaar</div>
                 </div>
             </div>
         </div>
@@ -113,6 +122,24 @@ const deleteDonut = () => {
 </template>
 
 <style scoped>
+
+.status__btn{
+    width: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.2em;
+    cursor: pointer;
+}
+
+.status{
+    flex-direction: column;
+}
+
+.img{
+    max-width: 250px;
+    max-height: 250px;
+}
 .donut {
     padding: 4em 0;
 }
@@ -143,7 +170,7 @@ const deleteDonut = () => {
     color: var(--dark);
 }
 .margin {
-    margin: 2em 0 4em 0;
+    margin: 2em 0 2em 0;
 }
 
 .details-big{
