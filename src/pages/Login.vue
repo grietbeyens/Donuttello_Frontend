@@ -4,22 +4,18 @@ import { LoginState } from '../store/LoginState';
 import router from '../router/router';
 
 if (localStorage.getItem('token')) {
-    router.push('/profiel'); //verwijst u naar gallerij
+    router.push('/profiel');
 }
 
 const login = (e) => {
     e.preventDefault();
     let apiUrl = BASE_URL + "/api/v1/users/login/";
-
-    //get input value
     let username = document.querySelector("#username").value;
     let wachtwoord = document.querySelector("#wachtwoord").value;
-
     let data = {
         username: username,
         password: wachtwoord
     }
-
     fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -28,16 +24,16 @@ const login = (e) => {
         mode: 'cors',
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                localStorage.setItem("token", data.data.token);
-                LoginState.loggedIn = true;
-                router.push('/gallerij');
-            } else {
-                alert("Er is iets misgegaan, probeer het opnieuw");
-            }
-        })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            localStorage.setItem("token", data.data.token);
+            LoginState.loggedIn = true;
+            router.push('/gallerij');
+        } else {
+            document.querySelector(".checkPw").style.display = "block";
+        }
+    })
 }
 
 </script>
@@ -56,6 +52,7 @@ const login = (e) => {
                 <input class="input__text text" type="password" id="wachtwoord" name="wachtwoord" v-model="text">
             </div>
         </div>
+        <p class="obligated checkPw">Gebruikersnaam of wachtwoord is onjuist</p>
         <div class="flex flex--center">
             <router-link class="btn" @click="login" exact to="">Log in</router-link>
         </div>
@@ -63,6 +60,11 @@ const login = (e) => {
 </template>
 
 <style scoped>
+
+.checkPw{
+    display: none;
+    margin-bottom: 1em;
+}
 .pw {
     text-decoration: none;
     color: #a0a0a0;
