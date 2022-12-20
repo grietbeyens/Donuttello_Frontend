@@ -23,7 +23,6 @@ const createUrl = () => {
     } else {
         createDonut();
     }
-    
 }
 
 const createDonut = () =>{
@@ -58,12 +57,10 @@ const createDonut = () =>{
     })
     .then (response => response.json())
     .then(data => {
-        console.log(data);
         if(data.status === "success"){
-            // router.push('/bestelling'); 
-            alert("Uw bestelling is succesvol geplaatst");
+            router.push('/bestelling'); 
         } else {
-            alert("Er is iets misgegaan, probeer het later opnieuw");
+            document.querySelector(".donutCheck").innerHTML = "Niet alle velden zijn ingevuld.";
         }
     })
 }
@@ -151,6 +148,7 @@ const createDonut = () =>{
                         placeholder="Ik wil 1 donut zonder sprinkels."></textarea>
                 </div>
             </div>
+            <p class="obligated donutCheck"></p>
             <router-link class="btn" @click="createUrl" exact to="">Naar bestelling</router-link>
             </div>
         </div>
@@ -158,6 +156,11 @@ const createDonut = () =>{
 </template>
 
 <style scoped>
+
+.donutCheck{
+    margin-bottom: 1em;
+}
+
 .padding-left{
     padding: 0 2em;
 }
