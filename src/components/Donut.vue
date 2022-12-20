@@ -18,11 +18,12 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.load('../src/assets/models/donut/scene.gltf', (gltf) => {
     donut = gltf.scene;
     gltf.scene.scale.set(4, 4, 4);
-    gltf.scene.rotateX(Math.PI / 6)
+    gltf.scene.rotateY(-6.5)
     scene.add(donut);
 });
 
 //add orbit controls
+const controls = new OrbitControls(camera, renderer.domElement);
 onMounted(() => {
     document.querySelector(".donut").appendChild(renderer.domElement);
 
@@ -79,9 +80,9 @@ onMounted(() => {
     const rechthoekGeometry = new THREE.BoxGeometry(2, 1, 1);
     const rechthoekMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: rechthoekTexture, side: THREE.FrontSide });
     const rechthoek = new THREE.Mesh(rechthoekGeometry, rechthoekMaterial);
-    rechthoek.position.set(0, 2, -0.2);
-    rechthoek.scale.set(1, 0.1, 1);
-    rechthoek.rotation.x = 0.8;
+    rechthoek.position.set(0, 1.6, -0.1);
+    rechthoek.scale.set(0.8, 0.08, 0.8);
+    rechthoek.rotation.set(1.5, 0, 0.5)
 
     const checkboxRechthoek = document.querySelector("#rechthoek");
     checkboxRechthoek.addEventListener("change", () => {
@@ -97,9 +98,9 @@ onMounted(() => {
     const vierkantGeometry = new THREE.BoxGeometry(1, 1, 1);
     const vierkantMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: vierkantTexture });
     const vierkant = new THREE.Mesh(vierkantGeometry, vierkantMaterial);
-    vierkant.position.set(0, 2, -0.2);
+    vierkant.position.set(0, 1.6, -0.1);
     vierkant.scale.set(1, 0.1, 1);
-    vierkant.rotation.x = 0.8;
+    vierkant.rotation.set(1.5, 0, 0.5)
 
     const checkboxVierkant = document.querySelector("#vierkant");
     checkboxVierkant.addEventListener("change", () => {
@@ -115,10 +116,9 @@ onMounted(() => {
     const cirkelGeometry = new THREE.CylinderGeometry(0.6, 0.6, 1, 32);
     const cirkelMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: cirkelTexture });
     const cirkel = new THREE.Mesh(cirkelGeometry, cirkelMaterial);
-    cirkel.position.set(0, 2, -0.2);
+    cirkel.position.set(0, 1.6, 0);
     cirkel.scale.set(1, 0.1, 1);
-    cirkel.rotation.x = 0.8;
-    cirkel.rotation.y = 1.55;
+    cirkel.rotation.set(0, 1, 1.55);
 
     const checkboxCirkel = document.querySelector("#cirkel");
     checkboxCirkel.addEventListener("change", () => {
@@ -136,10 +136,9 @@ onMounted(() => {
     const ovaalGeometry = new THREE.CylinderGeometry(0.6, 0.6, 1, 32);
     const ovaalMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: ovaalTexture, side: THREE.FrontSide });
     const ovaal = new THREE.Mesh(ovaalGeometry, ovaalMaterial);
-    ovaal.position.set(0, 2, -0.2)
+    ovaal.position.set(0, 1.6, -0.1);
     ovaal.scale.set(1, 0.1, 1.5);
-    ovaal.rotation.x = 0.8;
-    ovaal.rotation.y = 1.55;
+    ovaal.rotation.set(0, 1, 1.55);
 
     const checkboxOvaal = document.querySelector("#ovaal");
     checkboxOvaal.addEventListener("change", () => {
@@ -189,6 +188,8 @@ function animate() {
 }
 
 animate();
+
+
 </script>
 
 <template>
