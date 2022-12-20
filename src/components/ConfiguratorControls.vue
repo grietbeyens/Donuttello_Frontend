@@ -6,19 +6,24 @@ import router from '../router/router';
 let logoUrl;
 
 const createUrl = () => {
-    let logo = document.querySelector(".imageInput").files[0];
-    let formData = new FormData();
-    formData.append("file", logo);
-    formData.append("upload_preset", "ufvfe1g5");
-    fetch("https://api.cloudinary.com/v1_1/dg3efqczq/image/upload", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        logoUrl = data.secure_url;
+    if(document.querySelector(".imageInput").files.length !== 0){
+        let logo = document.querySelector(".imageInput").files[0];
+        let formData = new FormData();
+        formData.append("file", logo);
+        formData.append("upload_preset", "ufvfe1g5");
+        fetch("https://api.cloudinary.com/v1_1/dg3efqczq/image/upload", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            logoUrl = data.secure_url;
+            createDonut();
+        })
+    } else {
         createDonut();
-    })
+    }
+    
 }
 
 const createDonut = () =>{
@@ -52,7 +57,15 @@ const createDonut = () =>{
         body: JSON.stringify(data)
     })
     .then (response => response.json())
-    router.push('/bestelling'); 
+    .then(data => {
+        console.log(data);
+        if(data.status === "success"){
+            // router.push('/bestelling'); 
+            alert("Uw bestelling is succesvol geplaatst");
+        } else {
+            alert("Er is iets misgegaan, probeer het later opnieuw");
+        }
+    })
 }
 </script>
 
