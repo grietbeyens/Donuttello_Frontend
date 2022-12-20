@@ -15,7 +15,7 @@ renderer.setSize(window.innerWidth, window.innerHeight - 200);
 let donut;
 let group;
 const gltfLoader = new GLTFLoader();
-gltfLoader.load('./assets/scene.gltf', (gltf) => {
+gltfLoader.load('./assets/models/scene.gltf', (gltf) => {
     donut = gltf.scene;
     gltf.scene.scale.set(4, 4, 4);
     gltf.scene.rotateY(-6.5)
